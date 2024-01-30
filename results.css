@@ -1,0 +1,22 @@
+.button {
+    margin-top: 20px;
+    text-align: center;
+    color: white; /* Altere a cor do texto */
+  }
+  
+  .agromaps-results button {
+    background-color: #035e0a;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 16px;
+    display: block; /* Isso faz com que o botão ocupe toda a largura disponível */
+    margin: 0 auto; /* Isso centraliza o botão */
+  }
+  
+  .agromaps-results button:hover {
+    background-color: #c203d3;
+  }

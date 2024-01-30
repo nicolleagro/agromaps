@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultados</title>
+  <link rel="stylesheet" href="results.css">
+  <style>
+    header {
+      background-color: #86a837; /* Cor de fundo verde */
+      padding: 20px;
+      color: white; /* Cor do texto */
+      text-align: center; /* Centraliza o texto */
+      font-size: 35Px; /* Tamanho da fonte */
+      width: 98%;
+      position: fixed;
+      top: 0;
+      left: 0;    
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;   
+    }
+    body {
+      background-color:#5B702B;
+      padding-top: 70px; /* Adicionando espaço para o cabeçalho */
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .agromaps-results {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .agromaps-results h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .agromaps-results label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    .agromaps-results input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    .agromaps-results button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 16px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .agromaps-results button:hover {
+      background-color: #45a049;
+    }
+    #resultadoVazao {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+    .resultado-info {
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>AGROMAPS</header>
+  <div class="container">
+    <div class="agromaps-results" id="destaque">
+      <h2>Resultados da Área:</h2>
+      <p class="resultado-info">Área Total: <span id="areaTotal"></span> m²</p>
+      <p class="resultado-info">Hectares: <span id="resultadoHectares"></span> ha</p>
+      <p class="resultado-info">Metros Quadrados: <span id="resultadoMetrosQuadrados"></span> m²</p>
+      <h2>Calculo da vazão necessária</h2>
+      <div>
+        <label>Área Irrigada (m²):</label>
+        <input type="number" id="areaIrrigada" placeholder="Resultado obtido em m²">
+      </div>
+      <div>
+        <label>Evapotranspiração da Cultura (mm/dia):</label>
+        <input type="number" id="evapotranspiracao" placeholder="Evapotranspiração em mm">
+        <a href="calculadora_evapotranspiracao.html">Não sabe? Clique aqui.</a>
+      </div>
+      <div>
+        <label>Tempo de Irrigação (horas):</label>
+        <input type="number" id="tempoIrrigacao" placeholder="Tempo de irrigação em horas">
+      </div>
+      <button id="button" onclick="calcularVazao()">Calcular Vazão</button>
+      <div id="resultadoVazao"></div>
+    </div>
+  </div>
+
+  <script>
+    // Extrair os parâmetros da URL
+var urlParams = new URLSearchParams(window.location.search);
+var hectares = parseFloat(urlParams.get('hectares'));
+var metrosQuadrados = parseFloat(urlParams.get('metrosQuadrados'));
+
+// Exibir os resultados na página
+document.getElementById('resultadoHectares').textContent = hectares.toFixed(4);
+document.getElementById('resultadoMetrosQuadrados').textContent = metrosQuadrados.toFixed(2);
+
+    function calcularVazao() {
+      var areaIrrigada = parseFloat(document.getElementById('areaIrrigada').value) || 0;
+      var evapotranspiracao = parseFloat(document.getElementById('evapotranspiracao').value) || 0;
+      var tempoIrrigacao = parseFloat(document.getElementById('tempoIrrigacao').value) || 0;
+
+      var evapotranspiracaoHora = evapotranspiracao / 24;
+      var vazao = areaIrrigada * evapotranspiracaoHora * tempoIrrigacao;
+
+
+      document.getElementById('resultadoVazao').innerHTML = 'Vazão Necessária: ' + vazao.toFixed(2) + ' L';
+    }
+  </script>
+</body>
+</html>

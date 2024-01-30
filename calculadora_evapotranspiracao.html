@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Evapotranspiração</title>
+  <style>
+    header {
+      background-color: #86a837; /* Cor de fundo verde */
+      padding: 20px;
+      color: white; /* Cor do texto */
+      text-align: center; /* Centraliza o texto */
+      font-size: 35px; /* Tamanho da fonte */
+      width: 98%;
+      position: fixed;
+      top: 0;
+      left: 0; 
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;      
+    }
+    body {
+      background-color: #5B702B;
+      font-family: Arial, sans-serif;
+    }
+
+    h2 {
+      color: #86a837;
+    }
+
+    form {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+      margin: 20px auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    #resultadoEvapotranspiracao {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+      margin: 20px auto;
+      color: #333;
+    }
+
+    #resultadoEvapotranspiracao .aviso {
+      color: red;
+      text-align: center;
+      margin-top: 20px;
+    }
+    p{
+        color: #ccc;
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>AGROMAPS</header>
+  <h2>Calculadora de Evapotranspiração</h2>
+  <p>Insira o número aproximado de semanas após a emergência da planta e selecione a cultura para calcular a evapotranspiração aproximada.</p>
+  <form id="evapotranspirationForm">
+    <label for="cultura">Selecione a cultura:</label>
+    <select id="cultura">
+      <option value="milho">Milho</option>
+      <option value="soja">Soja</option>
+    </select>
+    <br>
+    <label for="estagio">Semanas após emergência da planta:</label>
+    <input type="text" id="estagio">
+    <br>
+    <button type="submit">Calcular Evapotranspiração</button>
+  </form>
+
+  <div id="resultadoEvapotranspiracao"></div>
+
+  <script>
+    document.getElementById('evapotranspirationForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var cultura = document.getElementById('cultura').value;
+      var semanasAposEmergencia = parseFloat(document.getElementById('estagio').value);
+
+      var evapotranspiracao;
+
+      // Lógica de cálculo da evapotranspiração para o milho
+      if (cultura === 'milho') {
+        if (semanasAposEmergencia >= 1 && semanasAposEmergencia <= 2) {
+          evapotranspiracao = 0.6;
+        } else if (semanasAposEmergencia <= 3) {
+          evapotranspiracao = 0.9;
+        } else if (semanasAposEmergencia <= 4) {
+          evapotranspiracao = 1;
+        } else if (semanasAposEmergencia <= 5) {
+          evapotranspiracao = 1.2;
+        } else if (semanasAposEmergencia <= 7) {
+          evapotranspiracao = 2.6;
+        } else if (semanasAposEmergencia <= 8) {
+          evapotranspiracao = 3;
+        } else if (semanasAposEmergencia <= 10) {
+          evapotranspiracao = 6.5;
+        } else {
+          evapotranspiracao = 5.2;
+        }
+      }
+      // Lógica de cálculo da evapotranspiração para a soja
+      else if (cultura === 'soja') {
+        if (semanasAposEmergencia >= 1 && semanasAposEmergencia <= 2) {
+          evapotranspiracao = 0.5;
+        } else if (semanasAposEmergencia <= 3) {
+          evapotranspiracao = 1.2;
+        } else if (semanasAposEmergencia <= 4) {
+          evapotranspiracao = 2.2;
+        } else if (semanasAposEmergencia <= 5) {
+          evapotranspiracao = 2.3;
+        } else if (semanasAposEmergencia <= 6) {
+          evapotranspiracao = 3.6;
+        } else if (semanasAposEmergencia <= 7) {
+          evapotranspiracao = 3.9;
+        } else if (semanasAposEmergencia <= 8) {
+          evapotranspiracao = 4.7;
+        } else if (semanasAposEmergencia <= 9) {
+          evapotranspiracao = 4;
+        } else if (semanasAposEmergencia <= 10) {
+          evapotranspiracao = 2.9;
+        } else if (semanasAposEmergencia <= 11) {
+          evapotranspiracao = 1.8;
+        } else {
+          evapotranspiracao = 0.8;
+        }
+      } else {
+        evapotranspiracao = 0; // Outras culturas ainda não suportadas
+      }
+
+      // Exibir o resultado
+      var resultado = "Evapotranspiração da cultura " + cultura + " nas semanas " + semanasAposEmergencia + " após emergência da planta é de " + evapotranspiracao.toFixed(2) + " mm/dia.";
+      document.getElementById('resultadoEvapotranspiracao').textContent = resultado;
+
+      // Adicionar o texto de aviso
+      var aviso = "Este é um resultado médio e não considera fatores como região, clima e sementes. É de suma importância a avaliação de um profissional para um resultado mais preciso.";
+      var avisoElement = document.createElement('p');
+      avisoElement.classList.add('aviso');
+      avisoElement.textContent = aviso;
+      document.getElementById('resultadoEvapotranspiracao').appendChild(avisoElement);
+    });
+  </script>
+</body>
+</html>

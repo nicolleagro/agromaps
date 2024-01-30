@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title class="titulo">Mapa Interativo</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+ header {
+      background-color: #86a837; /* Cor de fundo verde */
+      padding: 20px;
+      color: white; /* Cor do texto */
+      text-align: center; /* Centraliza o texto */
+      font-size: 35px;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+      
+    }
+    #info {
+      margin-top: 5px;
+      padding: 20px;
+      background-color: #5B702B; /* Cor de fundo da caixa de texto */
+      color: #ffffff;
+    }
+    main {
+      padding: 20px;
+    }
+    #button {
+      margin-top: 10px;
+    }
+    body {
+            background-color:#5B702B
+        }
+        #logo {
+      width: 100px; 
+      height: auto; 
+    }
+
+   </style>
+</head>
+<body> 
+  <header>
+    
+      AGROMAPS
+  
+  </header>
+  <div id="info">
+    <h2>Sobre o Agromaps</h2>
+    <p>O Agromaps é uma plataforma que combina conceitos de física e lógica de programação para automatizar cálculos relacionados ao gotejamento na agricultura. Nosso objetivo é fornecer ferramentas que facilitem o trabalho dos produtores e promovam a eficiência no uso de recursos hídricos. Para iniciar, seleciona a area que será usada:</p>
+  </div>
+  
+  <div id="map"></div>
+
+  </div>
+  <div class="selecao"> 
+    Selecione o local para calcular os hectares e a  <span id="areaSelecionadaHectares"></span> hectares<br>
+    Área selecionada: <span id="areaSelecionadaMetrosQuadrados"></span> m²
+    <div class="botao" id="button">
+      <button id="verResultados">Ver Resultados</button>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
