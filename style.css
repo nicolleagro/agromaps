@@ -58,4 +58,15 @@ body {
     font-size: 18px;
     color: #fafffa; /* Verde escuro */
   }
+@media screen and (max-width: 500px) {
+  body {
+    font-size: 20px; /* Reduza o tamanho da fonte para dispositivos móveis */
+  }
+     .selecao {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: #fafffa; /* Verde escuro */
+  }
+}
   
